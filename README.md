@@ -3,7 +3,7 @@
 
 # BAWA IS A SCHOOL PROJECT MADE BY ARTEM OLSHANCHENKO AND ARTEM MELEKHOV IN BUSINESS COLLEGE HELSINKI IN 2026
 
-# BAWA ISN'T A REAL BIDDING PLATFROM AND IS A DEMO WITHOUT AN ABILITY TO USE REAL MONEY
+# BAWA ISN'T A REAL BIDDING PLATFROM AND IS A DEMO WITHOUT AN ABILITY TO USE REAL MONEY.. YET
 
 ## BAWA is a bidding platfrom for literally anything, well, as long as it's legal (don't factcheck) and it has an AI integration! Which is your own, personal one that you can plug in with an API key!
 
