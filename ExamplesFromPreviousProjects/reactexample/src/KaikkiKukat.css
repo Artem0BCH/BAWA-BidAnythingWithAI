@@ -1,0 +1,8 @@
+.KaikkiKukat {
+  padding: 1em;
+}
+.KaikkiKukat .kukat {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+}
