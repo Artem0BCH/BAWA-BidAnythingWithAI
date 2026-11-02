@@ -1,0 +1,182 @@
+{
+    "kukka": {
+        "hae_kaikki": {
+            "sql": ["SELECT kukkanro,nimi,kuvaus,hoito_ohje from kukka"]
+        },
+        "hae_perusavaimella": {
+            "sql": [
+                "SELECT kukkanro,nimi,kuvaus,hoito_ohje from kukka",
+                "where kukkanro=?"
+            ]
+        },
+        "hae_nimella": {
+            "sql": [
+                "SELECT kukkanro,nimi,kuvaus,hoito_ohje from kukka",
+                "where nimi=?"
+            ]
+        },
+        "hae_nimilista": {
+            "sql": ["SELECT nimi, kukkanro from kukka order by nimi asc"]
+        },
+        "lisaa": {
+            "sql": [
+                "INSERT into kukka (kukkanro,nimi,kuvaus,hoito_ohje)",
+                "values (?,?,?,?)"
+            ],
+            "parametrijarjestys": ["kukkanro", "nimi", "kuvaus", "hoito_ohje"]
+        },
+        "paivita_kukka": {
+            "sql": [
+                "UPDATE kukka set nimi=?,kuvaus=?,hoito_ohje=?",
+                "where kukkanro=?"
+            ],
+            "parametrijarjestys": ["nimi", "kuvaus", "hoito_ohje", "kukkanro"]
+        },
+        "perusavain": "kukkanro"
+    },
+    "viljelija": {
+        "hae_kaikki": {
+            "sql": [
+                "SELECT  viljelijanro, ytunnus, nimi, osoite, yhteys_sukunimi,",
+                "yhteys_etunimi, yhteys_puhelin, yhteys_email FROM viljelija"
+            ]
+        },
+        "hae_perusavaimella": {
+            "sql": [
+                "select viljelijanro, ytunnus, nimi, osoite, yhteys_sukunimi, yhteys_etunimi,",
+                "yhteys_puhelin, yhteys_email from viljelija",
+                "WHERE viljelijanro=?"
+            ]
+        },
+        "hae_nimella": {
+            "sql": [
+                "select viljelijanro, ytunnus, nimi, osoite, yhteys_sukunimi, yhteys_etunimi,",
+                "yhteys_puhelin, yhteys_email from viljelija",
+                "WHERE nimi=?"
+            ]
+        },
+        "hae_ytunnuksella": {
+            "sql": [
+                "select viljelijanro, ytunnus, nimi, osoite, yhteys_sukunimi, yhteys_etunimi,",
+                "yhteys_puhelin, yhteys_email from viljelija",
+                "WHERE ytunnus=?"
+            ]
+        },
+        "hae_nimi_osoite_perusavaimella": {
+            "sql": ["SELECT nimi, osoite from viljelija WHERE viljelijanro=?"]
+        },
+        "hae_nimi_osoite_nimella": {
+            "sql": ["SELECT nimi, osoite from viljelija WHERE nimi=?"]
+        },
+        "hae_nimi_osoite_ytunnuksella": {
+            "sql": ["SELECT nimi, osoite from viljelija WHERE ytunnus=?"]
+        },
+        "hae_nimi_osoite_lista": {
+            "sql": [
+                "SELECT nimi, viljelijanro from viljelija ORDER BY nimi ASC"
+            ]
+        },
+        "lisaa": {
+            "sql": [
+                "INSERT into viljelija (viljelijanro, ytunnus, nimi,",
+                "osoite, yhteys_sukunimi, yhteys_etunimi, yhteys_puhelin,",
+                "yhteys_email) values(?,?,?,?,?,?,?,?)"
+            ],
+            "parametrijarjestys": [
+                "viljelijanro",
+                "ytunnus",
+                "nimi",
+                "osoite",
+                "yhteys_sukunimi",
+                "yhteys_etunimi",
+                "yhteys_puhelin",
+                "yhteys_email"
+            ]
+        },
+        "paivita_viljelija": {
+            "sql": [
+                "UPDATE viljelija set ytunnus=?, nimi=?, osoite=?,",
+                "yhteys_sukunimi=?, yhteys_etunimi=?, yhteys_puhelin=?,",
+                "yhteys_email=? where viljelijanro=?"
+            ],
+            "parametrijarjestys": [
+                "ytunnus",
+                "nimi",
+                "osoite",
+                "yhteys_sukunimi",
+                "yhteys_etunimi",
+                "yhteys_puhelin",
+                "yhteys_email",
+                "viljelijanro"
+            ]
+        },
+        "perusavain": "viljelijanro"
+    },
+    "varasto": {
+        "hae_kaikki": {
+            "sql": [
+                "SELECT numero, kukka.kukkanro, kukka.nimi AS kukkanimi,",
+                "viljelija.viljelijanro, viljelija.nimi AS viljelijanimi,viljelijan_kukat.kuvaus,",
+                "varastosaldo, yksikkohinta from kukka",
+                "INNER JOIN viljelijan_kukat on kukka.kukkanro=viljelijan_kukat.kukkanro",
+                "INNER JOIN viljelija on viljelija.viljelijanro=viljelijan_kukat.viljelijanro",
+                "ORDER BY viljelija.nimi ASC, kukka.nimi ASC"
+            ]
+        },
+        "hae_viljelijan_kukat_nimella": {
+            "sql": [
+                "SELECT numero, viljelija.viljelijanro, viljelija.nimi AS viljelijanimi,",
+                "kukka.kukkanro, kukka.nimi AS kukkanimi, viljelijan_kukat.kuvaus,",
+                "varastosaldo, yksikkohinta from kukka INNER JOIN viljelijan_kukat on",
+                "kukka.kukkanro=viljelijan_kukat.kukkanro INNER JOIN viljelija on",
+                "viljelija.viljelijanro=viljelijan_kukat.viljelijanro",
+                "WHERE viljelija.nimi=?",
+                "ORDER BY kukka.nimi ASC"
+            ]
+        },
+        "hae_viljelijan_kukat_ytunnuksella": {
+            "sql": [
+                "SELECT numero, viljelija.viljelijanro, viljelija.nimi AS viljelijanimi,",
+                "kukka.kukkanro, kukka.nimi AS kukkanimi, viljelijan_kukat.kuvaus,",
+                "varastosaldo, yksikkohinta from kukka INNER JOIN viljelijan_kukat on",
+                "kukka.kukkanro=viljelijan_kukat.kukkanro INNER JOIN viljelija on",
+                "viljelija.viljelijanro=viljelijan_kukat.viljelijanro",
+                "WHERE viljelija.ytunnus=?",
+                "ORDER BY kukka.nimi ASC"
+            ]
+        },
+        "lisaa": {
+            "sql": [
+                "INSERT INTO viljelijan_kukat (viljelijanro,",
+                "kukkanro, kuvaus, varastosaldo, yksikkohinta)",
+                "values (?,?,?,?,?)"
+            ],
+            "parametrijarjestys": [
+                "viljelijanro",
+                "kukkanro",
+                "kuvaus",
+                "varastosaldo",
+                "yksikkohinta"
+            ]
+        },
+        "paivita_varasto": {
+            "sql": [
+                "update viljelijan_kukat set kuvaus=?, varastosaldo=?, yksikkohinta=?",
+                "where numero=?"
+            ],
+            "parametrijarjestys": [
+                "kuvaus",
+                "varastosaldo",
+                "yksikkohinta",
+                "numero"
+            ]
+        },
+        "paivita_varastosaldo": {
+            "sql": [
+                "update viljelijan_kukat set varastosaldo=?, wherenumero=?"
+            ],
+            "parametrijarjestys": ["varastosaldo", "numero"]
+        },
+        "perusavain": "numero"
+    }
+}

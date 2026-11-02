@@ -1,0 +1,6 @@
+.ViljelijaLomake form div,
+form {
+  display: grid;
+  justify-items: left;
+  gap: 0.2em;
+}

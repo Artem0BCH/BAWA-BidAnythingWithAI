@@ -1,0 +1,12 @@
+.Kukka .selite {
+  font-weight: bold;
+  padding-right: 0.5em;
+  color: black;
+}
+
+.Kukka {
+  color: blue;
+  padding: 1em;
+  border: solid green 0.2em;
+  background-color: beige;
+}
