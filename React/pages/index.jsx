@@ -1,11 +1,11 @@
-import "../components/footer.jsx";
-import "../components/header.jsx";
+import Footer from "../components/footer.jsx";
+import Header from "../components/header.jsx";
 
 function Index() {
     return (
         <>
             <main>
-                <header />
+                <Header />
                 <section id="firstsection">
                     <h1>Welcome to BAWA</h1>
                     <h3>Worlds best AI integrated fullstack system</h3>
@@ -38,7 +38,7 @@ function Index() {
                         in <b>One</b> place.
                     </h3>
                 </section>
-                <footer />
+                <Footer />
             </main>
         </>
     );
