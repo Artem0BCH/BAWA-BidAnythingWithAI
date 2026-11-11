@@ -75,8 +75,7 @@ INSERT INTO ai_configuration(
     created_at,
     deletet_at
 )
-values(1, "Claude", "oppus 5.5", "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
-", "11.11.2026", "12.12.2026");
+values(1, "Claude", "", "", "11.11.2026", "12.12.2026");
 
 INSERT INTO ai_conversations( conversation_id, title)
 values(1, "Help me to navigate in this website");
