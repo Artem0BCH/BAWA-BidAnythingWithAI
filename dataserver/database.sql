@@ -13,7 +13,7 @@ CREATE TABLE users(
 );
 CREATE TABLE user_profiles(
     profile_id integer not null primary key,
-    user_id foreign key users.user_id,
+    foreign key(user_id) references users(user_id),
     first_name varchar(50) not null,
     last_name varchar(50) not null,
     phone_number varchar(15) not null,
@@ -27,8 +27,8 @@ CREATE TABLE user_profiles(
 
 CREATE TABLE items(
     item_id integer not null primary key,
-    seller_id foreign key users.user_id,
-    category_id foreign key categories.category_id,
+    foreign key(seller_id) references users(user_id),
+    foreign key(category_id) references categories(category_id),
     title varchar(30) not null,
     description varchar(500) not null,
     condition not null,
@@ -44,7 +44,7 @@ CREATE TABLE categories(
 );
 CREATE TABLE item_images(
     image_id integer not null primary key,
-    item_id foreign key items.item_id,
+    foreign key(item_id) references items(item_id),
     image_url varchar(100) not null,
     is_primary varchar(20) not null,
     uploaded_at varchar(20) not null
@@ -53,10 +53,10 @@ CREATE TABLE item_images(
 
 CREATE TABLE auctions(
     auction_id integer not null primary key,
-    product_id foreign key items.item_id,
-    winner_id foreign key users.user_id,
+    foreign key(product_id) references items(item_id),
+    foreign key(winner_id) references users(user_id),
     starting_price varchar(20) not null,
-    current price varchar(20) not null,
+    current_price varchar(20) not null,
     minimum_increment varchar(20) not null,
     reserve_price varchar(20) not null,
     start_time varchar(20) not null,
@@ -65,22 +65,22 @@ CREATE TABLE auctions(
 );
 CREATE TABLE bids(
     bid_id integer not null primary key,
-    auction_id foreign key auctions.auction_id,
-    bidder_id foreign key users.user_id,
+    foreign key(auction_id) references auctions(auction_id),
+    foreign key(bidder_id) references users(user_id),
     bid_amount varchar(50) not null,
     amount_of_bids not null,
     status varchar(50) not null
 );
 CREATE TABLE watchlist(
     watchlist_id integer not null primary key,
-    user_id foreign key users.user_id,
-    auction_id foreign key auctions.auction_id
+    foreign key(user_id) references users(user_id),
+    foreign key(auction_id) references auctions(auction_id)
 );
 
 
 CREATE TABLE ai_configuration(
     config_id integer not null primary key,
-    user_id foreign key users.user_id,
+    foreign key(user_id) references users(user_id),
     provider varchar(30) not null,
     model varchar(20) not null,
     encrypted_api_key integer varchar (200) not null,
@@ -89,18 +89,18 @@ CREATE TABLE ai_configuration(
 );
 CREATE TABLE ai_conversations(
     conversation_id integer not null primary key,
-    user_id foreign key users.user_id,
+    foreign key(user_id) references users(user_id),
     title varchar(50) not null
 );
 CREATE TABLE ai_messages(
     message_id integer not null primary key,
-    conversation_id foreign key ai_conversations.conversation_id
+    foreign key(conversation_id) references ai_configurations(conversation_id),
 );
 
 
 CREATE TABLE notifications(
     notification_id integer not null primary key,
-    user_id foreign key users.user_id,
+    foreign key(user_id) references users(user_id),
     title varchar(15),
     message ,
     type varchar(15),
@@ -110,12 +110,15 @@ CREATE TABLE notifications(
 
 CREATE TABLE transactions(
     transaction_id integer not null primary key,
-    auction_id foreign key auctions.auction_id,
-    buyer_id foreign key users.user_id,
-    seller_id foreign key users.user_id,
+    foreign key(auction_id) references auctions(auction_id),
+    foreign key(buyer_id) references users(user_id),
+    foreign key(seller_id) references users(user_id),
     amount integer varchar(50) not null,
     payment_status varchar(15) not null,
     created_at varchar(15) not null,
     paid_at varchar(15) not null 
 );
 
+drop user if exists "testuser"@"localhost";
+CREATE user "testuser"@"localhost" identified by "1234";
+GRANT all privileges on BAWAdb.* to "testuser"@"localhost"
