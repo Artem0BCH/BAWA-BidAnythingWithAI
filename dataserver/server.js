@@ -16,4 +16,4 @@ app.use(express.json());
 app.use(express.static("./public"));
 
 
-app.listen(port, host, () => console.log(`${host}:${port} palvelee...`));
+app.listen(port, host, () => console.log(`${host}:${port} serves...`));
