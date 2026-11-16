@@ -7,7 +7,7 @@ import config from "./config.json" with {type: "json"};
 const { prot, host } = config;
 /* const lauseet = muodostaSql(sql); ==  import muodostaSql from "./muodostaSql.js";*/
 
-const varasto = new Database(connectioninfo);
+const storage = new Database(connectioninfo);
 const RECOURSE = "BAWAdb";
 
 const app = express();
