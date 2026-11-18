@@ -2,8 +2,9 @@ import { useState } from "react";
 import Index from "../pages/index.jsx";
 import Home from "../pages/home.jsx";
 import UploadingPage from "../pages/uploading.jsx";
+import AdminPage from "../pages/admin.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     //const isLoggedIn = localStorage.getItem("token");
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/" element={<Index />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/uploading" element={<UploadingPage />} />
+                    <Route path="/admin" element={<AdminPage />} />
                 </Routes>
             </BrowserRouter>
         </>
