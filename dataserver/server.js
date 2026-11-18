@@ -20,4 +20,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("./public"));
 
+app.get(`/${RESOURCE}/users`, async (req, res) => {
+    try{
+        const result = await storage.runQuery(sql.users.get_all.sql, []);
+        res.json(result.queryResult);
+    } catch(error) {
+        console.error(error);
+
+        res.status(500).json({
+            error: "faled to retrieve users"
+        });
+    }
+});
+
 app.listen(port, host, () => console.log(`${host}:${port} hosting...`));
