@@ -3,7 +3,7 @@ import cors from "cors";
 /* js imports */
 import connectioninfo from "./connectioninfo.json" with { type: "json" };
 import Database from "./database.js";
-import formSql from "./formSql.js";
+import formsql from "./formsql.js";
 /* sql import */
 import config from "./config.json" with { type: "json" };
 import sql from "./sql.json" with { type: "json" };
@@ -20,15 +20,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("./public"));
 
+//get all users
 app.get(`/${RESOURCE}/users`, async (req, res) => {
     try{
         const result = await storage.runQuery(sql.users.get_all.sql, []);
         res.json(result.queryResult);
     } catch(error) {
-        console.error(error);
+        console.error("Database error:", error);
 
         res.status(500).json({
-            error: "faled to retrieve users"
+            error: error.msg || "failed to retrieve users"
         });
     }
 });
