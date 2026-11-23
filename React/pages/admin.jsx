@@ -16,7 +16,7 @@ function AdminPage() {
             setLoading(true);
             setError("");
 
-            const response = await fetch("/BAWA/users"); // this requests from 4000, and this is basically from the browser aka from the dataserver and we don't need to say full link cuz it's configed anyway
+            const response = await fetch("/BAWAdb/users"); // this requests from 4000, and this is basically from the browser aka from the dataserver and we don't need to say full link cuz it's configed anyway
 
             if (!response.ok) {
                 // if response opposite of ok (not ok, basically something went wrong)
