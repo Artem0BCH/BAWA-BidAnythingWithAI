@@ -1,51 +1,95 @@
-use BAWAdb;
+USE BAWAdb;
 
---HUOM! delete vaarallinen ilman where-osaa
+-- users
+INSERT INTO users (
+    user_id,
+    username,
+    email,
+    password,
+    created_at,
+    account_status
+)
+VALUES (
+    1,
+    'test dummy',
+    'testdummy@gmail.com',
+    '1234@1234',
+    '2026-11-09 10:00:00',
+    'Active'
+);
 
-delete from users;
-delete from user_profiles;
-delete from items;
-delete from categories;
-delete from item_images;
-delete from auctions;
-delete from bids;
-delete from watchlist;
-delete from ai_configuration;
-delete from ai_conversations;
-delete from ai_messages;
-delete from notifications;
-delete from transactions;
 
-INSERT INTO users(user_id, username, email, password, created_at, account_status)
-values( 1, "test dummy", "testdummy@gmail.com", "1234@1234", "9.11.2026", "Active");
+-- profiles
+INSERT INTO user_profiles (
+    profile_id,
+    user_id,
+    first_name,
+    last_name,
+    phone_number,
+    profile_picture,
+    address,
+    city,
+    postal_code,
+    country
+)
+VALUES (
+    1,
+    1,
+    'dummy',
+    'test',
+    '+358 44 2223456',
+    'cutiepie.png',
+    'twinstreet',
+    'TwinCity',
+    '01666',
+    'Finland'
+);
 
-INSERT INTO user_profiles(profile_id, first_name, last_name, phone_number, profile_picture, address, city, postal_code, country)
-values(1, "dummy", "test", "+358 44 2223456", "cutiepie.png", "twinstreet", "TwinCity", "01666", "Finland");
 
-INSERT INTO items(
+-- categorys
+INSERT INTO categories (category_id, category_name)
+VALUES(1, 'medieval');
+
+
+-- items
+INSERT INTO items (
     item_id,
+    seller_id,
+    category_id,
     title,
     description,
-    condition,
+    `condition`,
     brand,
     model,
     created_at,
     updated_at,
-    deletet_at)
-values(1, "Catapult", "This catapult shoots dummys", "Very good", "LockheadMartin", "Dummyblaster 01", "9.11.2026", "10.11.2026", "12.11.2026");
+    deletet_at
+)
+VALUES (
+    1,
+    1,
+    1,
+    'Catapult',
+    'This catapult shoots dummies',
+    'Very good',
+    'LockheadMartin',
+    'Dummyblaster 01',
+    '2026-11-09 10:00:00',
+    '2026-11-10 10:00:00',
+    NULL
+);
 
-INSERT INTO categories(category_id, category_name)
-values(1, "medievel");
 
-INSERT INTO item_images(
-    image_id,
-    image_url,
-    is_primary,
-    updated_at)
-values(1, "https://jambo.png", "true", "11.11.2026");
+-- item images
+INSERT INTO item_images (image_id, item_id, image_url, is_primary, uploaded_at)
+VALUES (1, 1, 'https://jambo.png', TRUE, '2026-11-11 10:00:00');
 
-INSERT into auctions(
+
+-- auctions
+INSERT INTO auctions (
     auction_id,
+    product_id,
+    winner_id,
     starting_price,
     current_price,
     minimum_increment,
@@ -54,49 +98,112 @@ INSERT into auctions(
     end_time,
     status
 )
-values(1, 50, 67, 1, 100, "11.11.2026 10:05", "12.11.2026 12:00", "active");
+VALUES (
+    1,
+    1,
+    NULL,
+    50.00,
+    67.00,
+    1.00,
+    100.00,
+    NOW(),
+    DATE_ADD(NOW(), INTERVAL 1 DAY),
+    'active'
+);
 
-INSERT INTO bids(
+
+-- bids
+INSERT INTO bids (
     bid_id,
+    auction_id,
+    bidder_id,
     bid_amount,
     amount_of_bids,
     status
 )
-values(1, 1, 1, "active");
+VALUES (
+    1,
+    1,
+    1,
+    67.00,
+    1,
+    'active'
+);
 
-INSERT INTO watchlist( watchlist_id,)
-values(1);
 
-INSERT INTO ai_configuration(
+-- wathclist
+INSERT INTO watchlist (watchlist_id, user_id, auction_id)
+VALUES (1, 1, 1 );
+
+
+-- AI config
+INSERT INTO ai_configuration (
     config_id,
+    user_id,
     provider,
     model,
     encrypted_api_key,
     created_at,
     deletet_at
 )
-values(1, "Claude", "", "", "11.11.2026", "12.12.2026");
+VALUES (
+    1,
+    1,
+    'Claude',
+    '',
+    '',
+    '2026-11-11 10:00:00',
+    NULL
+);
 
-INSERT INTO ai_conversations( conversation_id, title)
-values(1, "Help me to navigate in this website");
 
-INSERT INTO ai_messages(ai_messages)
-values(1);
+-- AI conv
+INSERT INTO ai_conversations (conversation_id, user_id, title)
+VALUES (1, 1, 'Help me navigate this website');
 
-INSERT INTO notifications(
+
+-- AI messages
+INSERT INTO ai_messages ( message_id, conversation_id)
+VALUES (1, 1 );
+
+
+-- Notifications
+INSERT INTO notifications (
     notification_id,
+    user_id,
     title,
     message,
     type,
     is_read
 )
-values(1, "Email adress confirmation", "Confirm your email adress!", "warning", "True");
+VALUES (
+    1,
+    1,
+    'Email address confirmation',
+    'Confirm your email address!',
+    'warning',
+    TRUE
+);
 
-INSERT INTO transactions(
+
+-- Transactions
+INSERT INTO transactions (
     transaction_id,
+    auction_id,
+    buyer_id,
+    seller_id,
     amount,
     payment_status,
     created_at,
     paid_at
 )
-values(1, 77, "Succesful", "11.11.2026 10:27", "11.11.2026 10:30");
+VALUES (
+    1,
+    1,
+    1,
+    1,
+    77.00,
+    'Successful',
+    '2026-11-11 10:27:00',
+    '2026-11-11 10:30:00'
+); 
