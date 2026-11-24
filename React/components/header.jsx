@@ -1,4 +1,6 @@
+// React Imports (Stuff we didn't make)
 import { useState } from "react";
+
 export default function Header({ query, onQueryChange }) {
     const [open, setOpen] = useState(false);
     return (
