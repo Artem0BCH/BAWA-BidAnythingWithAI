@@ -1,3 +1,4 @@
+// React Imports (Stuff we didn't make)
 import { Link } from "react-router-dom";
 
 function Footer() {
