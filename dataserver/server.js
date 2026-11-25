@@ -53,6 +53,22 @@ app.get(`/${RESOURCE}/categories`, async (req, res) => {
     }
 });
 
+// Get all user profiles
+app.get(`/${RESOURCE}/user_profiles`, async (req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM user_profiles",
+            []
+        );
+        res.json(result.queryResult);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({
+            error: "Failed to retrieve categories"
+        });
+    }
+});
+
 // Get all items
 app.get(`/${RESOURCE}/items`, async(req, res) =>{
     try{
@@ -69,6 +85,22 @@ app.get(`/${RESOURCE}/items`, async(req, res) =>{
     }
 });
 
+// Get all item images
+app.get(`/${RESOURCE}/item_images`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM item_images",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error:", error);
+        res.status(500).json({
+            error: "Failed to rerieve item_images"
+        });
+    }
+});
+
 // Get all auctions
 app.get(`/${RESOURCE}/auctions`, async(req, res) =>{
     try{
@@ -81,6 +113,118 @@ app.get(`/${RESOURCE}/auctions`, async(req, res) =>{
         console.error("Database error", error);
         res.status(500).json({
             error: "Failed to retrieve auctions"
+        });
+    }
+});
+
+// Get all bids
+app.get(`/${RESOURCE}/bids`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM bids",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error:", error);
+        res.status(500).json({
+            error:"Failed to retrieve bids"
+        });
+    }
+});
+
+// Get all watchlist entries
+app.get(`/${RESOURCE}/watchlist`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM watchlist",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error:", error);
+        res.status(500).json({
+            error: "Failed to retrieve watchlist"
+        });
+    }
+});
+
+// Get all ai configuration
+app.get(`/${RESOURCE}/ai_configuration`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM ai_configuration",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error:", error);
+        res.status(500).json({
+            error: "Failed to retrieve ai_configuration"
+        });
+    }
+});
+
+// Get all ai_conversation
+app.get(`/${RESOURCE}/ai_conversations`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM ai_conversations",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error:", error);
+        res.status(500).json({
+            error: "Failed to retrieve ai_conversations"
+        });
+    }
+});
+
+// Get all ai_messages
+app.get(`/${RESOURCE}/ai_messages`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM ai_messages",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error:", error);
+        res.status(500).json({
+            error: "Failed to retrieve ai_messages"
+        });
+    }
+});
+
+// Get all notifications
+app.get(`/${RESOURCE}/notifications`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM notifications",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error", error);
+        res.status(500).json({
+            error: "Failed to retrieve notifications"
+        });
+    }
+});
+
+// Get all transactions
+app.get(`/${RESOURCE}/transactions`, async(req, res) => {
+    try{
+        const result = await storage.runQuery(
+            "SELECT * FROM transactions",
+            []
+        );
+        res.json(result.queryResult);
+    } catch(error){
+        console.error("Database error", error);
+        res.status(500).json({
+            error: "Failed to retrieve transactions"
         });
     }
 });
