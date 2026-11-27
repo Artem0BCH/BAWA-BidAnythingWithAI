@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 function Auctions() {
-    const [auctions, setAuctions] = useState([]); // these are explained in showusers
+    const [auctions, setAuctions] = useState([]); // these are explained in showusers, but this one basically keeps data
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -19,7 +19,7 @@ function Auctions() {
 
                 const data = await response.json(); // web request into usable json
 
-                setAuctions(data); // holds data
+                setAuctions(data); // useState saves the web request
             } catch (error) {
                 setError(error.message);
             } finally {
